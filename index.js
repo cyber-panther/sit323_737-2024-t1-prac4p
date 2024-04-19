@@ -2,12 +2,12 @@ const express = require("express");
 
 const app = express();
 
-const checkNumbers = (req) => {
 
-  if (isNaN(req.query.num1) || isNaN(req.query.num1)) {
-    throw new Error("Invalid numbers");
-  }
-  return true
+const checkNumbers = (num1, num2) => {
+  if (isNaN(num1))
+    throw new Error("Invalid number num1");
+  if (isNaN(num2))
+    throw new Error("Invalid number num2");
 }
 
 const calculate = (num1, num2, operation) => {
@@ -40,10 +40,7 @@ app.get("/add", (req, res) => {
     var num1 = parseFloat(req.query.num1);
     var num2 = parseFloat(req.query.num2);
 
-    if (isNaN(num1))
-      throw new Error("Invalid number num1");
-    if (isNaN(num2))
-      throw new Error("Invalid number num2");
+    checkNumbers(num1, num2)
 
     const result = calculate(num1, num2, operation);
     res.json('Parameters ' + num1 + ' and ' + num2 + ' received for operation -> ' + operation + ': And the result is ' + result);
@@ -59,14 +56,9 @@ app.get("/subtract", (req, res) => {
 
     var num1 = parseFloat(req.query.num1);
     var num2 = parseFloat(req.query.num2);
+    
+    checkNumbers(num1, num2)
 
-    if (isNaN(num1))
-      throw new Error("Invalid number num1");
-    if (isNaN(num2))
-      throw new Error("Invalid number num2");
-
-    var num1 = parseFloat(req.query.num1);
-    var num2 = parseFloat(req.query.num2);
     const result = calculate(num1, num2, operation);
     res.json('Parameters ' + num1 + ' and ' + num2 + ' received for operation -> ' + operation + ': And the result is ' + result);
 
@@ -82,13 +74,8 @@ app.get("/multiply", (req, res) => {
     var num1 = parseFloat(req.query.num1);
     var num2 = parseFloat(req.query.num2);
 
-    if (isNaN(num1))
-      throw new Error("Invalid number num1");
-    if (isNaN(num2))
-      throw new Error("Invalid number num2");
+    checkNumbers(num1, num2)
 
-    var num1 = parseFloat(req.query.num1);
-    var num2 = parseFloat(req.query.num2);
     const result = calculate(num1, num2, operation);
     res.json('Parameters ' + num1 + ' and ' + num2 + ' received for operation -> ' + operation + ': And the result is ' + result);
 
@@ -104,13 +91,8 @@ app.get("/divide", (req, res) => {
     var num1 = parseFloat(req.query.num1);
     var num2 = parseFloat(req.query.num2);
 
-    if (isNaN(num1))
-      throw new Error("Invalid number num1");
-    if (isNaN(num2))
-      throw new Error("Invalid number num2");
-
-    var num1 = parseFloat(req.query.num1);
-    var num2 = parseFloat(req.query.num2);
+    checkNumbers(num1, num2)
+    
     const result = calculate(num1, num2, operation);
     res.json('Parameters ' + num1 + ' and ' + num2 + ' received for operation -> ' + operation + ': And the result is ' + result);
 
